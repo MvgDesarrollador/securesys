@@ -12,12 +12,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class AuthServiceImpl {
 
-
     @Autowired
-    private UserRepository userRepository;
+    private UserServiceImpl userServiceImpl;
 
     @Autowired
     private JwtTokenProvider tokenProvider;
@@ -33,15 +33,13 @@ public class AuthServiceImpl {
 
     private final String TYPE_TOKEN = "Bearer";
 
-
     public ResponseDTO authenticate(AuthRequest authRequest) {
-        User user = userRepository.findByUserName(authRequest.getUsername())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userServiceImpl.findByUserName(authRequest.getUsername());
 
             UserDTO userDTO = mapperTool.userToDTO(user);
 
-        if (!passwordEncoder.matches(authRequest.getPassword(), user.getPassword())) {
-            throw new RuntimeException("Invalid credentials"); //Personalize
+        if (!passwordEncoder.matches(authRequest.getPassword(), userDTO.getPasswordHash())) {
+            throw new RuntimeException("Invalid credentials");
         }
 
         String token = tokenProvider.createToken(userDTO.getUsername(), userDTO.getListRole());
@@ -50,7 +48,6 @@ public class AuthServiceImpl {
                 .expiresIn(expiresIn)
                 .tokenType(TYPE_TOKEN)
                 .build();
-
 
         return ResponseDTO.builder().data(tokenResponse).build();
     }

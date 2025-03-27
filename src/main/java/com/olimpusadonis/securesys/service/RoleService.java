@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface RoleService {
 
-    List<Role> findAll() throws Exception;
-    RoleDTO createRole(RoleDTO roleDTO) throws Exception;
-    RoleDTO updateRole(RoleDTO roleDTO) throws Exception;
-    String deleteRole() throws Exception;
+    List<Role> findAll();
+    RoleDTO createRole(RoleDTO roleDTO);
+    RoleDTO updateRole(RoleDTO roleDTO);
+    String deleteRole();
 }

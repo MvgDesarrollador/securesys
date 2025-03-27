@@ -1,5 +1,6 @@
 package com.olimpusadonis.securesys.controller;
 
+import com.olimpusadonis.securesys.config.annotations.ApiVersion;
 import com.olimpusadonis.securesys.model.RoleDTO;
 import com.olimpusadonis.securesys.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/api/role")
+@ApiVersion("v1")
+@RequestMapping("/api/v1/role")
 public class RoleController {
 
     @Autowired

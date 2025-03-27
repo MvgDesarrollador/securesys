@@ -12,10 +12,14 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 
+import com.olimpusadonis.securesys.config.annotations.ApiVersion;
+
+
 
 @RestController
-@RequestMapping("/api/user")
-public class UserController {
+@ApiVersion("v1")
+@RequestMapping("/api/v1/user")
+public class UserController extends BaseController{
 
     private final UserService userService;
 

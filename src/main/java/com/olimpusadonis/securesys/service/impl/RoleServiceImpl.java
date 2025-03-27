@@ -25,7 +25,7 @@ public class RoleServiceImpl implements RoleService {
     };
 
     @Override
-    public RoleDTO createRole(RoleDTO roleDTO) throws Exception {
+    public RoleDTO createRole(RoleDTO roleDTO){
 
         Role response = roleRepository.save(mapperTool.roleToEntity(roleDTO));
         if(response != null){
@@ -36,17 +36,17 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<Role> findAll() throws Exception {
+    public List<Role> findAll(){
         return List.of();
     }
 
     @Override
-    public RoleDTO updateRole(RoleDTO roleDTO) throws Exception {
+    public RoleDTO updateRole(RoleDTO roleDTO){
         return null;
     }
 
     @Override
-    public String deleteRole() throws Exception {
+    public String deleteRole(){
         return "";
     }
 }
